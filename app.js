@@ -1,13 +1,19 @@
-function generateTreeId() {
-  const ts = Date.now();
-  const rnd = Math.floor(Math.random() * 10000);
-  return `tree_${ts}_${rnd}`;
-}
-
 function generateQR() {
-  const treeId = generateTreeId();
+  const treeId = document.getElementById('treeIdInput').value.trim();
+  if (!treeId) {
+    alert("กรุณาใส่ tree_id ก่อนกด Generate");
+    return;
+  }
   const canvas = document.getElementById('qrCanvas');
-  QRCode.toCanvas(canvas, treeId, () => {
+
+  QRCode.toCanvas(canvas, treeId, {
+    width: 400, 
+    margin: 1,
+    color: {
+      dark: "#000000",
+      light: "#ffffff"
+    }
+  }, () => {
     const img = canvas.toDataURL("image/png");
     const a = document.createElement('a');
     a.href = img;
