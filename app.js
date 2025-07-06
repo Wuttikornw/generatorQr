@@ -1,7 +1,7 @@
 function generateTreeId() {
-  const timestamp = Date.now();
-  const random = Math.floor(Math.random() * 10000);
-  return `tree_${timestamp}_${random}`;
+  const ts = Date.now();
+  const rnd = Math.floor(Math.random() * 10000);
+  return `tree_${ts}_${rnd}`;
 }
 
 function generateQR() {
@@ -9,9 +9,9 @@ function generateQR() {
   const canvas = document.getElementById('qrCanvas');
   QRCode.toCanvas(canvas, treeId, () => {
     const img = canvas.toDataURL("image/png");
-    const link = document.createElement('a');
-    link.href = img;
-    link.download = `${treeId}.png`;
-    link.click();
+    const a = document.createElement('a');
+    a.href = img;
+    a.download = `${treeId}.png`;
+    a.click();
   });
 }
